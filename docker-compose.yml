@@ -12,6 +12,20 @@ services:
     volumes:
       - ./storage/postgres:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: storage-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - ./storage/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
   minio:
     image: minio/minio:latest
     container_name: storage-s3
@@ -24,6 +38,19 @@ services:
     volumes:
       - ./storage/s3:/data
     command: server /data --console-address ":9001"
+
+  redis:
+    build:
+      context: ./storage/redis
+      dockerfile: Dockerfile
+    container_name: storage-redis
+    restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - ./storage/redis/data:/data
+      - ./storage/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
 
   nginx:
     build:
@@ -40,3 +67,5 @@ services:
     depends_on:
       - postgres
       - minio
+      - redis
+      - pgadmin

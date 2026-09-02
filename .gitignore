@@ -46,7 +46,12 @@ logs/
 # ================================
 
 /storage/postgres/
+/storage/pgadmin/
 /storage/s3/
+/storage/redis/data/
+/storage/redis/*.rdb
+/storage/redis/*.aof
+/storage/redis/appendonlydir/
 
 # ================================
 # Temporary files
