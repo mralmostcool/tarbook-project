@@ -46,7 +46,13 @@ logs/
 # ================================
 
 /storage/postgres/
-/storage/pgadmin/
+/storage/pgadmin/data/
+/storage/pgadmin/*.db
+/storage/pgadmin/sessions/
+/storage/pgadmin/storage/
+/storage/pgadmin/azurecredentialcache/
+/storage/pgadmin/pgpass
+!/storage/pgadmin/pgpass.example
 /storage/s3/
 /storage/redis/data/
 /storage/redis/*.rdb

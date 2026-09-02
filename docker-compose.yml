@@ -19,10 +19,13 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     volumes:
-      - ./storage/pgadmin:/var/lib/pgadmin
+      - ./storage/pgadmin/data:/var/lib/pgadmin
+      - ./storage/pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./storage/pgadmin/pgpass:/pgadmin4/pgpass:ro
     depends_on:
       - postgres
 
