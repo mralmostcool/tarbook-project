@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
+	"github.com/gowebpki/jcs"
 )
 
 var (
@@ -56,26 +57,19 @@ func UnmarshalWire(data []byte) (OperationEnvelope, error) {
 }
 
 // CanonicalBytes generates a deterministic, normalized byte representation of the operation
-// suitable for cryptographic payload hashing and ECDSA signing per ADR 0004.
-// It ensures lexicographically sorted keys and normalized whitespace.
+// strictly conforming to RFC 8785 (JSON Canonicalization Scheme - JCS).
+// It recursively normalizes whitespace, number formatting, string encodings, and lexicographical key ordering.
 func CanonicalBytes(op OperationEnvelope) ([]byte, error) {
 	if op.OperationID == uuid.Nil || op.EntityType == "" || op.Action == "" {
 		return nil, ErrInvalidEnvelope
 	}
 
-	// Normalize payload to sorted JSON without insignificant whitespace
-	var parsedPayload any
-	if err := json.Unmarshal(op.Payload, &parsedPayload); err != nil {
-		return nil, fmt.Errorf("failed to parse payload for canonicalization: %w", err)
+	// Validate payload is well-formed JSON before wrapping
+	if !json.Valid(op.Payload) {
+		return nil, fmt.Errorf("payload is not valid JSON: %w", ErrInvalidEnvelope)
 	}
 
-	normalizedPayload, err := json.Marshal(parsedPayload)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal normalized payload: %w", err)
-	}
-
-	// Construct canonical envelope with explicit alphabetical key ordering
-	canonicalObj := struct {
+	envelope := struct {
 		Action      string          `json:"action"`
 		EntityType  string          `json:"entity_type"`
 		OperationID string          `json:"operation_id"`
@@ -84,8 +78,18 @@ func CanonicalBytes(op OperationEnvelope) ([]byte, error) {
 		Action:      op.Action,
 		EntityType:  op.EntityType,
 		OperationID: op.OperationID.String(),
-		Payload:     normalizedPayload,
+		Payload:     op.Payload,
 	}
 
-	return json.Marshal(canonicalObj)
+	raw, err := json.Marshal(envelope)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal envelope for canonicalization: %w", err)
+	}
+
+	canonical, err := jcs.Transform(raw)
+	if err != nil {
+		return nil, fmt.Errorf("RFC 8785 JCS canonicalization failed: %w", err)
+	}
+
+	return canonical, nil
 }

@@ -118,3 +118,53 @@ func TestOperationEnvelope_CanonicalSerializationDeterministic(t *testing.T) {
 		t.Fatalf("SHA-256 hash mismatch on canonical bytes: %x vs %x", hash1, hash2)
 	}
 }
+
+func TestOperationEnvelope_RFC8785JCSConformance(t *testing.T) {
+	opID := uuid.MustParse("018f9e61-89ab-7def-8123-456789abcdef")
+
+	// Payload with deep nesting, float representations, non-canonical whitespace
+	chaoticPayload := json.RawMessage(`{
+		"z_nested": {
+			"b": 100.0,
+			"a": "test\u0020value"
+		},
+		"a_list": [3, 2, 1],
+		"m_number": 1e2
+	}`)
+
+	op := outbox.OperationEnvelope{
+		OperationID: opID,
+		EntityType:  "TASK_ENTRY",
+		Action:      "INSERT",
+		Payload:     chaoticPayload,
+	}
+
+	canonical, err := outbox.CanonicalBytes(op)
+	if err != nil {
+		t.Fatalf("CanonicalBytes failed: %v", err)
+	}
+
+	// Expected RFC 8785 canonical JSON:
+	// 1. Top-level keys sorted: "action", "entity_type", "operation_id", "payload"
+	// 2. Nested keys sorted: "a_list", "m_number", "z_nested" -> "a", "b"
+	// 3. Numbers normalized: 1e2 -> 100, 100.0 -> 100
+	// 4. Unicode escape \u0020 normalized to literal space
+	// 5. Zero insignificant whitespace
+	expected := `{"action":"INSERT","entity_type":"TASK_ENTRY","operation_id":"018f9e61-89ab-7def-8123-456789abcdef","payload":{"a_list":[3,2,1],"m_number":100,"z_nested":{"a":"test value","b":100}}}`
+
+	if string(canonical) != expected {
+		t.Fatalf("RFC 8785 JCS conformance failure:\ngot:  %s\nwant: %s", string(canonical), expected)
+	}
+
+	// Verify non-JSON payload returns an error
+	invalidOp := outbox.OperationEnvelope{
+		OperationID: opID,
+		EntityType:  "TASK_ENTRY",
+		Action:      "INSERT",
+		Payload:     json.RawMessage(`{invalid_json}`),
+	}
+	if _, err := outbox.CanonicalBytes(invalidOp); err == nil {
+		t.Fatal("expected error on invalid JSON payload, got nil")
+	}
+}
+
