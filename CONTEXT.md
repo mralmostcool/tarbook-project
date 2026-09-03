@@ -88,6 +88,15 @@ _Avoid_: Voyage log, sea time record, shipboard period
 An immutable statutory certification executed by a Master or Chief Engineer attesting to a candidate's sea service, conduct, and watchkeeping.
 _Avoid_: Discharge stamp, captain review, voyage sign-off
 
+**Operation Envelope**:
+The polymorphic container bundling an individual mutation, its entity type, action, and payload within a sync session.
+_Avoid_: Message wrapper, command object, event payload
+
+**Sync Receipt**:
+The authoritative server response acknowledging a sync session, containing per-operation execution statuses and the current sync sequence.
+_Avoid_: Sync ack, response envelope, status dump
+
+
 
 
 
