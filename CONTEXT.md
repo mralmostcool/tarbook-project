@@ -76,6 +76,11 @@ _Avoid_: Signable string, payload JSON, raw record
 The sequential cryptographic digest linking consecutive immutable records to detect server-side audit alterations.
 _Avoid_: Blockchain, ledger, block history
 
+**Pure Mobile Edge**:
+The operational architecture where edge computing and persistence reside exclusively on seafarer mobile devices with zero shipboard server intermediaries.
+_Avoid_: Vessel edge, shipboard gateway, hybrid edge
+
+
 
 
 

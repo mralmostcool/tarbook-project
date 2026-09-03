@@ -56,6 +56,8 @@ Status:
 * [ADR 0002: Core Database Schema & Offline Entity Model](../../docs/adr/0002-core-database-schema-and-offline-entity-model.md) — Two-plane relational schema, UUIDv7 client primary keys, append-only cryptographic sign-offs, PostGIS spatial verification, MinIO evidence separation.
 * [ADR 0003: Offline Sync Architecture & Server Authority](../../docs/adr/0003-offline-sync-architecture-and-server-authority.md) — Authoritative BIGINT sync sequences, independently idempotent batch operations, decoupled two-phase evidence transfer.
 * [ADR 0004: Authentication, Cryptographic Provenance & Audit Integrity](../../docs/adr/0004-authentication-cryptographic-provenance-and-audit-integrity.md) — OAuth2/OIDC, hardware-backed ECDSA P-256 officer signing keys, air-gapped QR handshake with nonces, and database hash chaining.
+* [ADR 0005: Production Service Deployment & Edge Topology](../../docs/adr/0005-production-service-deployment-and-edge-topology.md) — Provider-agnostic managed containers, dedicated ingress/TLS termination, pure mobile edge.
+
 
 
 
