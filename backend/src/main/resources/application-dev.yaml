@@ -1,0 +1,32 @@
+spring:
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:tarbook_db}}
+    username: ${SPRING_R2DBC_USERNAME:${POSTGRES_USER:postgres_user}}
+    password: ${SPRING_R2DBC_PASSWORD:${POSTGRES_PASSWORD:postgres_password}}
+  flyway:
+    url: ${SPRING_FLYWAY_URL:jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:tarbook_db}}
+    user: ${SPRING_FLYWAY_USER:${POSTGRES_USER:postgres_user}}
+    password: ${SPRING_FLYWAY_PASSWORD:${POSTGRES_PASSWORD:postgres_password}}
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:${REDIS_HOST:localhost}}
+      port: ${SPRING_DATA_REDIS_PORT:${REDIS_PORT:6379}}
+      password: ${SPRING_DATA_REDIS_PASSWORD:${REDIS_PASSWORD:redis_password}}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+  api-docs:
+    enabled: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    com.mralmostcool.tarbook: DEBUG
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.postgresql: DEBUG
