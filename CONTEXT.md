@@ -80,6 +80,15 @@ _Avoid_: Blockchain, ledger, block history
 The operational architecture where edge computing and persistence reside exclusively on seafarer mobile devices with zero shipboard server intermediaries.
 _Avoid_: Vessel edge, shipboard gateway, hybrid edge
 
+**Sea Service Record**:
+The statutory record of qualifying shipboard service aboard a designated vessel, including sea days and certified aggregate watchkeeping totals.
+_Avoid_: Voyage log, sea time record, shipboard period
+
+**Sea Service Endorsement**:
+An immutable statutory certification executed by a Master or Chief Engineer attesting to a candidate's sea service, conduct, and watchkeeping.
+_Avoid_: Discharge stamp, captain review, voyage sign-off
+
+
 
 
 

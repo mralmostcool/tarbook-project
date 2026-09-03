@@ -57,6 +57,8 @@ Status:
 * [ADR 0003: Offline Sync Architecture & Server Authority](../../docs/adr/0003-offline-sync-architecture-and-server-authority.md) — Authoritative BIGINT sync sequences, independently idempotent batch operations, decoupled two-phase evidence transfer.
 * [ADR 0004: Authentication, Cryptographic Provenance & Audit Integrity](../../docs/adr/0004-authentication-cryptographic-provenance-and-audit-integrity.md) — OAuth2/OIDC, hardware-backed ECDSA P-256 officer signing keys, air-gapped QR handshake with nonces, and database hash chaining.
 * [ADR 0005: Production Service Deployment & Edge Topology](../../docs/adr/0005-production-service-deployment-and-edge-topology.md) — Provider-agnostic managed containers, dedicated ingress/TLS termination, pure mobile edge.
+* [ADR 0006: Sea Service Records & Statutory Endorsement Architecture](../../docs/adr/0006-sea-service-records-and-statutory-endorsement-architecture.md) — Composite FK TAR book binding, Master-certified aggregate watchkeeping totals, GiST date range exclusion, append-only endorsement lifecycle.
+
 
 
 
