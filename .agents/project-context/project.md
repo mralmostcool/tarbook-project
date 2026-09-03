@@ -14,13 +14,13 @@ Foundational architecture and discovery phase. Core backend skeleton initialized
 | Layer | Technology |
 | :--- | :--- |
 | **Language & Runtime** | Java 21 |
-| **Backend Framework** | Spring Boot 3.x, Spring WebFlux (Reactive), Spring Modulith |
+| **Backend Framework** | Spring Boot 3.x, Spring MVC (Virtual Threads), Spring Modulith |
 | **Security** | Spring Security |
-| **Relational & Spatial DB** | PostgreSQL with PostGIS extension (accessed via Spring Data R2DBC) |
-| **Cache & Queues** | Redis (Reactive) |
+| **Relational & Spatial DB** | PostgreSQL with PostGIS extension (Spring Data JPA / Hibernate Spatial via JDBC) |
+| **Cache & Queues** | Redis |
 | **Object Storage** | MinIO (S3-compatible storage for photos, schematics, and evidence artifacts) |
 | **Database Migrations** | Flyway (`flyway-database-postgresql` via Spring JDBC) |
-| **API Documentation** | SpringDoc OpenAPI WebFlux UI |
+| **API Documentation** | SpringDoc OpenAPI Starter WebMVC UI |
 | **Infrastructure** | Docker, Docker Compose, Nginx reverse proxy |
 
 ## Repository Structure

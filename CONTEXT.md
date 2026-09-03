@@ -1,0 +1,64 @@
+# Tarbook Domain Context
+
+Electronic Training and Assessment Record Book for maritime cadets and officers, providing tamper-evident logging, verification, and statutory compliance under intermittent connectivity.
+
+## Language
+
+**Candidate**:
+A maritime cadet or trainee undergoing approved shipboard training towards STCW certification.
+_Avoid_: Trainee, student, apprentice
+
+**Shore Sync**:
+The batch synchronization process executed when a candidate's device gains network connectivity in port or coastal range.
+_Avoid_: Live sync, real-time sync, cloud polling
+
+**Cloud Backend**:
+The central ashore server environment hosting primary databases, statutory audit archives, and tenant management.
+_Avoid_: Vessel server, shipboard gateway, edge host
+
+**TAR Book**:
+The digital record book instance issued to a candidate for an approved training program.
+_Avoid_: Logbook, training record (overloaded), portfolio
+
+**Task Entry**:
+An individual logged training task or competency activity performed by a candidate.
+_Avoid_: Log entry, activity item, training item
+
+**Task Sign-Off**:
+An immutable record of assessment or verification executed by an authorized supervising officer or assessor.
+_Avoid_: Approval stamp, officer endorsement, signature record
+
+**Evidence Artifact**:
+A digital file capturing verifiable supporting evidence linked to a task entry.
+_Avoid_: Attachment, media file, upload
+
+**Organization**:
+A legal maritime entity participating in training governance, such as a Maritime Training Institute (MTI), shipping company, or flag state administration.
+_Avoid_: Tenant, company (overloaded), institute
+
+**Training Program**:
+A structured curriculum conforming to STCW regulations governing a candidate's training syllabus.
+_Avoid_: Course, syllabus, track
+
+**Task Definition**:
+The standardized specification of a required competency task within a training program.
+_Avoid_: Requirement, checklist item, assignment
+
+**Sync Session**:
+A batch of state mutations submitted by an edge device during Shore Sync.
+_Avoid_: Sync run, sync push, sync request
+
+**Sync Operation**:
+An independently idempotent mutation on a single entity within a sync session.
+_Avoid_: Batch item, sync action, transaction item
+
+**Sync Sequence**:
+An authoritative, monotonically increasing 64-bit integer assigned by the cloud backend determining synchronization order.
+_Avoid_: Sync offset, WAL position, transaction ID
+
+**Sync Watermark**:
+An authoritative checkpoint referencing the highest sync sequence acknowledged between an edge device and cloud backend.
+_Avoid_: Sync cursor, offset, sync checkpoint
+
+
+

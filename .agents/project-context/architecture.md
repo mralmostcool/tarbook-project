@@ -52,7 +52,10 @@ Status:
 ---
 
 ## 4. Current Architectural Decisions
-* *(No decisions accepted yet — under active architectural discovery).*
+* [ADR 0001: Backend Stack & Deployment Model](../../docs/adr/0001-backend-stack-and-deployment-model.md) — Cloud-only Java 21, Spring Boot 3 MVC + Virtual Threads, JPA/Hibernate Spatial on PostgreSQL/PostGIS.
+* [ADR 0002: Core Database Schema & Offline Entity Model](../../docs/adr/0002-core-database-schema-and-offline-entity-model.md) — Two-plane relational schema, UUIDv7 client primary keys, append-only cryptographic sign-offs, PostGIS spatial verification, MinIO evidence separation.
+* [ADR 0003: Offline Sync Architecture & Server Authority](../../docs/adr/0003-offline-sync-architecture-and-server-authority.md) — Authoritative BIGINT sync sequences, independently idempotent batch operations, decoupled two-phase evidence transfer.
+
 
 ---
 
