@@ -1,33 +1,62 @@
-# Architecture
+# Architecture & Delivery Decisions
 
-## Architectural Style
+This document records the architectural principles, system structures, and accepted delivery decisions for Project Tarbook.
 
-<!-- Describe the chosen architecture. -->
+---
 
-## System Boundaries
+## 1. Architectural Style & Principles
+* **Evidence-Driven**: Architecture evolves from confirmed domain requirements and engineering evidence rather than fashion or premature frameworks.
+* **Smallest Justified Commitment**: Adopt the simplest structural model that satisfies known constraints.
+* **Separation of Concerns**: Isolate core maritime domain logic from delivery protocols (REST, CLI), edge storage, and infrastructure.
 
-<!-- Major components and what each owns. -->
+---
 
-## Backend Structure
+## 2. Accepted Delivery Decisions
 
-<!-- Modules/packages and their responsibilities. -->
+### Branching Strategy
+* **Primary Integration Branch**: `main`.
+* **Discipline**: Intentional simplicity during early development. Agents MUST NOT introduce complex branching models (e.g. GitFlow) without operational necessity.
+* **Evolution**: When maturity requires, transition to trunk-based development or lightweight feature branches with pull requests.
 
-## Frontend Structure
+### Environment Promotion
+* CI/CD must preserve the strict distinction between **Development** and **Production** environments even when deploying from the same `main` branch.
+* A single `main` branch does NOT imply a shared database or runtime environment.
 
-<!-- Major frontend boundaries. -->
+---
 
-## Dependency Rules
+## 3. Architectural Decisions (ADR Format)
 
-<!-- What may depend on what? -->
+Each architectural decision must be explicitly evaluated and recorded using this standard structure:
 
-## Data Flow
+```text
+Decision: <decision title>
 
-<!-- Describe important request/data flows. -->
+Context:
+<why the decision was necessary, including domain constraints>
 
-## Important Architectural Decisions
+Alternatives considered:
+<option A>
+<option B>
+<option C>
 
-<!-- Record decisions that agents must preserve. -->
+Rationale:
+<why the chosen approach was selected over alternatives>
 
-## Forbidden Patterns
+Consequences:
+<benefits, trade-offs, operational costs, risks>
 
-<!-- Things agents should not introduce. -->
+Status:
+<proposed | accepted | superseded | deprecated>
+```
+
+---
+
+## 4. Current Architectural Decisions
+* *(No decisions accepted yet — under active architectural discovery).*
+
+---
+
+## 5. Forbidden Patterns
+* Introducing frameworks, persistence technologies, or synchronization protocols without an evaluated ADR.
+* Hiding architectural choices inside implementation details.
+* Converting hypotheses or assumptions into permanent architectural constraints.
