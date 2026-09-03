@@ -60,5 +60,22 @@ _Avoid_: Sync offset, WAL position, transaction ID
 An authoritative checkpoint referencing the highest sync sequence acknowledged between an edge device and cloud backend.
 _Avoid_: Sync cursor, offset, sync checkpoint
 
+**Signing Key**:
+A hardware-backed, non-exportable asymmetric key pair enrolled by an officer to sign statutory records.
+_Avoid_: Auth key, user key, session credential
+
+**Signing Handshake**:
+The offline air-gapped protocol executed between candidate and officer devices to authorize an assessment.
+_Avoid_: Bluetooth pairing, signature request, local auth
+
+**Canonical Payload**:
+The deterministic, normalized byte representation of a task assessment signed by an officer.
+_Avoid_: Signable string, payload JSON, raw record
+
+**Hash Chain**:
+The sequential cryptographic digest linking consecutive immutable records to detect server-side audit alterations.
+_Avoid_: Blockchain, ledger, block history
+
+
 
 
