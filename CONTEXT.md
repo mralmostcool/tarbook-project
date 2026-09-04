@@ -135,3 +135,72 @@ _Avoid_: Conflict list, error bin, retry queue
 **Statutory Amendment**:
 The formal superseding correction of a finalized maritime record that preserves the original entry, reasons, and authorized administrative provenance.
 _Avoid_: Record update, edit overwrite, data fix
+
+**Full Export**:
+A self-contained TAR Book export bundle containing metadata, RFC 8785 JCS ECDSA signatures, trust material, and binary evidence artifacts.
+_Avoid_: Full backup, complete zip, media dump
+
+**Lightweight Export**:
+A self-contained TAR Book export bundle containing metadata, RFC 8785 JCS ECDSA signatures, trust material, and SHA-256 evidence digests with binary evidence payloads omitted.
+_Avoid_: Summary export, partial export, metadata-only zip
+
+**Offline Verifier Core**:
+The shared, decoupled cryptographic verification engine compiled to both zero-install single-file HTML/WASM browser distribution and native CLI binary targets.
+_Avoid_: Web verifier, validation tool, cert checker
+
+**Seafarer Document**:
+A seafarer identity or travel document (such as Passport, CDC, SID ILO 185, or INDOS) issued by a Flag State administration.
+_Avoid_: Travel card, ID paper, seafarer ID (overloaded)
+
+**Modular Safety Certificate**:
+An STCW safety or specialized training certification (e.g. BST PST/FPFF/EFA/PSSR, STSDSD, OCTCO) tracked in an append-only seafarer certificate ledger.
+_Avoid_: Safety card, course ticket, STCW paper
+
+**Pre-Embarkation Compliance Gate**:
+The rule-driven validation evaluator determining candidate sea-time logging and TAR Book enrollment eligibility based on document validity, expiry, pathway, and vessel parameters.
+_Avoid_: Enrollment check, medical gate, login blocker
+
+**Document Verification Record**:
+An immutable administrative record documenting MTI or Organization verification of a candidate's travel document or safety certificate, retaining verifier identity, timestamp, decision, and evidence digest.
+_Avoid_: Document approval stamp, paper check, cert sign-off
+
+**Maritime Satellite Chaos Proxy**:
+A programmatically-controlled network proxy injecting bandwidth constraints (9.6–128 kbps), high latency (2000–3000ms), packet drops, and TCP socket severs to stress-test Shore Sync protocols.
+_Avoid_: Network simulator, lag tool, drop proxy
+
+**Port Docking Stampede**:
+The high-concurrency surge scenario where dozens or hundreds of seafarer mobile edge devices initiate Shore Sync simultaneously upon vessel arrival in coastal or port cellular range.
+_Avoid_: Port surge, sync stampede (overloaded), mass sync
+
+**Pure Mobile Edge Core**:
+The Kotlin Multiplatform (KMP) shared library executing offline domain logic, SQLDelight persistence, outbox state management, RFC 8785 canonical serialization, and Ktor sync transport across Android and iOS.
+_Avoid_: Mobile app backend, offline client engine, shared SDK
+
+**Platform Key Enclave**:
+The platform-neutral abstraction interfacing shared KMP code with non-exportable hardware enclaves (Android Keystore/StrongBox and iOS Secure Enclave).
+_Avoid_: Key wrapper, hardware enclave driver, device crypto API
+
+**Air-Gapped QR Handshake**:
+The offline seafarer-to-officer 2D QR scanning protocol (static single-frame or multi-frame animated stream) transferring canonical sign-off payloads between mobile screens.
+_Avoid_: Bluetooth pairing, QR sync, screen scan
+
+**Outbox State Machine**:
+The 4-state client outbox lifecycle (`QUEUED`, `IN_FLIGHT`, `ACKNOWLEDGED`, `CONFLICT_STAGED`) governing local edge mutations during Shore Sync execution.
+_Avoid_: Client queue state, sync buffer, mutation tracker
+
+**Edge Computer Vision**:
+The mobile document scanning pipeline executing quad boundary detection, perspective transformation, contrast enhancement, and adaptive compression on mobile edge devices.
+_Avoid_: Mobile OCR, doc scanner (overloaded), image crop tool
+
+**Bounded Evidence Pipeline**:
+The memory-safe image processing downscaling and adaptive compression pipeline that produces final evidence bytes before SHA-256 digest computation.
+_Avoid_: Media resizer, image pipeline, upload scaler
+
+**Provenance Telemetry Envelope**:
+The sidecar metadata container holding capture timestamp, GNSS coordinates, accuracy, capture mode, and device integrity signals cryptographically bound to an Evidence Artifact.
+_Avoid_: EXIF wrapper, GPS tag, camera metadata
+
+
+
+
+
