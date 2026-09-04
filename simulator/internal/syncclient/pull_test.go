@@ -172,3 +172,41 @@ func TestPullClient_TransportError_NoLocalMutation(t *testing.T) {
 		t.Fatalf("no deltas should be applied on error")
 	}
 }
+
+func TestPullClient_ApplicationFailure_LeavesCursorUnchanged(t *testing.T) {
+	ctx := context.Background()
+	clientID := "vessel-sim-42"
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		resp := SyncPullResponse{
+			Items: []DeltaItem{
+				{
+					SyncSequence: 11,
+					OperationID:  uuid.New(),
+					EntityType:   "task_entries",
+					EntityID:     uuid.New(),
+					Action:       "UPSERT",
+					Payload:      json.RawMessage(`{}`),
+					CommittedAt:  time.Now().UTC(),
+				},
+			},
+			HasMore:          false,
+			NextSyncSequence: 11,
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(resp)
+	}))
+	defer server.Close()
+
+	mirror := &memoryMirrorStore{lastSyncSequence: 10, failApply: true}
+	client := NewPullClient(clientID, mirror, server.URL, server.Client())
+
+	_, err := client.Pull(ctx, 50)
+	if err == nil {
+		t.Fatalf("expected error on mirror write failure, got nil")
+	}
+	if mirror.lastSyncSequence != 10 {
+		t.Fatalf("cursor must remain unchanged at 10 when mirror apply fails, got %d", mirror.lastSyncSequence)
+	}
+}
+
