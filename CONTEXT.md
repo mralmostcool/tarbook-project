@@ -104,3 +104,10 @@ _Avoid_: Key validation, hardware check, device cert
 The statutory lifecycle and organizational approval workflow controlling seafarer signing key authorization and revocation.
 _Avoid_: Key management, credential admin, key auth
 
+**Vessel Crew Assignment**:
+The documented shipboard deployment of a seafarer to a designated vessel for a bounded temporal window.
+_Avoid_: Crew allocation, ship berth, officer posting
+
+**Roster Verification**:
+The validation gate matching an officer's signing authority against active vessel crew deployments on the task execution date.
+_Avoid_: Crew check, roster audit, shipboard auth
