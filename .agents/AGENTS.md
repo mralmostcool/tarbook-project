@@ -111,6 +111,7 @@ Never treat an existing implementation as proof of correctness. When architectur
 9. **Reasoned Security**: Cryptographic choices and auth models must be grounded in explicit threat models.
 10. **Reproducible Infrastructure**: Local dev environments must run reliably from version-controlled configuration.
 11. **CI Must Verify**: Automated pipelines must execute automated tests before allowing merges or deployments.
+12. **Never Use GitHub CLI (`gh`)**: NEVER invoke the `gh` tool or CLI under any circumstances. Use `rtk git` or standard `git` exclusively.
 
 ---
 
