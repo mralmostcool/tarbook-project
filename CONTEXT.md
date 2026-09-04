@@ -111,3 +111,11 @@ _Avoid_: Crew allocation, ship berth, officer posting
 **Roster Verification**:
 The validation gate matching an officer's signing authority against active vessel crew deployments on the task execution date.
 _Avoid_: Crew check, roster audit, shipboard auth
+
+**Program Overlay**:
+A modular curriculum layer defined by an organization that adds proprietary training tasks over a statutory STCW baseline without duplicating the parent program.
+_Avoid_: Custom syllabus, company program, cloned course
+
+**Competency Taxonomy**:
+The 3-tier IMO/STCW hierarchical structure categorizing training into Function, Competency, and Task Definition.
+_Avoid_: Task hierarchy, syllabus tree, category list

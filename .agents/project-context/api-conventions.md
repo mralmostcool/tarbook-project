@@ -16,6 +16,8 @@ RESTful JSON over HTTP/2 (OpenAPI 3.1).
   - `/api/v1/officers/keys/{id}/revoke`
   - `/api/v1/officers/keys/active`
   - `/api/v1/roster/crew-assignments/batch`
+  - `/api/v1/admin/programs/import`
+  - `/api/v1/admin/tar-books/{id}/migrate-program`
 
 ## HTTP Methods
 - `POST`: Submitting sync mutation batches (`/sync/push`), requesting upload URLs, and verifying checksums.
