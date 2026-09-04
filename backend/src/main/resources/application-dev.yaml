@@ -1,8 +1,9 @@
 spring:
-  r2dbc:
-    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:tarbook_db}}
-    username: ${SPRING_R2DBC_USERNAME:${POSTGRES_USER:postgres_user}}
-    password: ${SPRING_R2DBC_PASSWORD:${POSTGRES_PASSWORD:postgres_password}}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:tarbook_db}}
+    username: ${SPRING_DATASOURCE_USERNAME:${POSTGRES_USER:postgres_user}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${POSTGRES_PASSWORD:postgres_password}}
+    driver-class-name: org.postgresql.Driver
   flyway:
     url: ${SPRING_FLYWAY_URL:jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:tarbook_db}}
     user: ${SPRING_FLYWAY_USER:${POSTGRES_USER:postgres_user}}
@@ -28,5 +29,5 @@ logging:
   level:
     root: INFO
     com.mralmostcool.tarbook: DEBUG
-    org.springframework.r2dbc: DEBUG
-    io.r2dbc.postgresql: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.SQL: DEBUG

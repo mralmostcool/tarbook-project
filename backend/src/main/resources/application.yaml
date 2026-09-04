@@ -6,12 +6,13 @@ spring:
   threads:
     virtual:
       enabled: true
-  r2dbc:
-    pool:
-      enabled: true
-      initial-size: 5
-      max-size: 20
-      max-idle-time: 30m
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
   flyway:
     enabled: true
     baseline-on-migrate: true
