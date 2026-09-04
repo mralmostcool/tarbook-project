@@ -119,3 +119,11 @@ _Avoid_: Custom syllabus, company program, cloned course
 **Competency Taxonomy**:
 The 3-tier IMO/STCW hierarchical structure categorizing training into Function, Competency, and Task Definition.
 _Avoid_: Task hierarchy, syllabus tree, category list
+
+**Certification Pathway**:
+The formal statutory track (e.g. STCW Reg II/1 OICNW, Reg III/1 OICEW) specifying qualifying sea-time thresholds and watchkeeping rules for a seafarer certificate.
+_Avoid_: Training stream (overloaded), career path, licensing track
+
+**Eligibility Assessment**:
+The authoritative evaluation determining a candidate's qualification for Flag State examination, materializing qualifying days, watch hours, and competency task completion.
+_Avoid_: Sea time calculation, readiness check, audit report
