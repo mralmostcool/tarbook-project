@@ -20,6 +20,7 @@ RESTful JSON over HTTP/2 (OpenAPI 3.1).
   - `/api/v1/admin/tar-books/{id}/migrate-program`
   - `/api/v1/tar-books/{id}/eligibility`
   - `/api/v1/tar-books/{id}/eligibility/assessments`
+  - `/api/v1/admin/records/amend`
 
 ## HTTP Methods
 - `POST`: Submitting sync mutation batches (`/sync/push`), requesting upload URLs, and verifying checksums.
@@ -78,7 +79,7 @@ RESTful JSON over HTTP/2 (OpenAPI 3.1).
     "path": "/api/v1/sync/push"
   }
   ```
-- Differential sync errors return inside individual operation results (`status: "CONFLICT"` or `"REJECTED"`) with `error_code` and `server_state` without failing the entire batch.
+- Differential sync errors return inside individual operation results (`status: "CONFLICT"` or `"REJECTED"`) with `error_code` (`VERSION_CONFLICT`, `TERMINAL_STATE_LOCKED`, `DUPLICATE_NONCE`, `EVIDENCE_HASH_MISMATCH`, `CRYPTOGRAPHIC_SIGNATURE_INVALID`) and `server_state` without failing the entire batch.
 
 ## Authentication
 - OAuth2/OIDC with short-lived JWT access tokens and backend-revocable refresh tokens.

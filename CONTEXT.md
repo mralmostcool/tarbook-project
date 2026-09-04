@@ -127,3 +127,11 @@ _Avoid_: Training stream (overloaded), career path, licensing track
 **Eligibility Assessment**:
 The authoritative evaluation determining a candidate's qualification for Flag State examination, materializing qualifying days, watch hours, and competency task completion.
 _Avoid_: Sea time calculation, readiness check, audit report
+
+**Discrepancy Queue**:
+The client-side staging area on an edge device isolating conflicted or rejected sync mutations for seafarer review without blocking clean transactions.
+_Avoid_: Conflict list, error bin, retry queue
+
+**Statutory Amendment**:
+The formal superseding correction of a finalized maritime record that preserves the original entry, reasons, and authorized administrative provenance.
+_Avoid_: Record update, edit overwrite, data fix
