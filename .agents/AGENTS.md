@@ -112,6 +112,7 @@ Never treat an existing implementation as proof of correctness. When architectur
 10. **Reproducible Infrastructure**: Local dev environments must run reliably from version-controlled configuration.
 11. **CI Must Verify**: Automated pipelines must execute automated tests before allowing merges or deployments.
 12. **Never Use GitHub CLI (`gh`)**: NEVER invoke the `gh` tool or CLI under any circumstances. Use `rtk git` or standard `git` exclusively.
+13. **Complete Map & Task Definition Discipline**: When adding a task to a map, you MUST first document the task inside the map documentation/description/comment, define the task's objective clearly, and specify what you are going to implement in grave detail before declaring the map completely defined.
 
 ---
 
