@@ -96,12 +96,11 @@ _Avoid_: Message wrapper, command object, event payload
 The authoritative server response acknowledging a sync session, containing per-operation execution statuses and the current sync sequence.
 _Avoid_: Sync ack, response envelope, status dump
 
+**Key Attestation**:
+The cryptographic verification proving a signing key was generated within a non-exportable hardware enclave (StrongBox/TEE/Secure Enclave).
+_Avoid_: Key validation, hardware check, device cert
 
-
-
-
-
-
-
-
+**Key Governance**:
+The statutory lifecycle and organizational approval workflow controlling seafarer signing key authorization and revocation.
+_Avoid_: Key management, credential admin, key auth
 

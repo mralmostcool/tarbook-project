@@ -10,6 +10,11 @@ RESTful JSON over HTTP/2 (OpenAPI 3.1).
   - `/api/v1/sync/pull`
   - `/api/v1/evidence/{id}/upload-url`
   - `/api/v1/evidence/{id}/verify`
+  - `/api/v1/officers/keys/attestation-challenge`
+  - `/api/v1/officers/keys/register`
+  - `/api/v1/officers/keys/{id}/approve`
+  - `/api/v1/officers/keys/{id}/revoke`
+  - `/api/v1/officers/keys/active`
 
 ## HTTP Methods
 - `POST`: Submitting sync mutation batches (`/sync/push`), requesting upload URLs, and verifying checksums.

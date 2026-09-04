@@ -8,6 +8,14 @@
 
 <!-- Canonical terminology used throughout the system. -->
 
+### Officer Signing Key
+
+A hardware-backed ECDSA P-256 key used exclusively for statutory record signing, isolated from API authentication.
+
+### Canonical Payload
+
+A deterministic byte-level encoding format for data before signing, ensuring verification consistency.
+
 ### User
 
 A human identity that can authenticate.
