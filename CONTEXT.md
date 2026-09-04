@@ -96,13 +96,7 @@ _Avoid_: Message wrapper, command object, event payload
 The authoritative server response acknowledging a sync session, containing per-operation execution statuses and the current sync sequence.
 _Avoid_: Sync ack, response envelope, status dump
 
-**Edge Simulator**:
-A standalone tool that faithfully simulates the offline edge lifecycle of candidate and officer devices without server authority.
-_Avoid_: Test client, API stub, mock server
 
-**Simulator Profile**:
-The runtime operational role assumed by the edge simulator (candidate or officer).
-_Avoid_: User context, test actor, persona flag
 
 
 

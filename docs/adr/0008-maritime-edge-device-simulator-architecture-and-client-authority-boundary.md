@@ -3,7 +3,9 @@
 We adopt a standalone Go CLI simulator in `simulator/` using Charm Bubbletea, embedded pure-Go SQLite, dual interactive/headless execution modes, and an explicit ownership boundary enforcing that the simulator is non-authoritative.
 
 ## Status
-accepted
+superseded
+
+> **Superseded 2026-09-04**: The decision to build a Go CLI simulator has been reversed. The project simplifies its development strategy by using standard integration tests (Testcontainers, HTTP test clients, Postman/Newman) rather than a dedicated simulator binary. The client authority boundary table below remains a valid conceptual reference for any future mobile client implementation.
 
 ## Context
 Developing and validating the Spring Boot Shore Sync backend requires a realistic offline client. Relying solely on Postman cannot simulate accumulated offline outboxes, UUIDv7 generation, or air-gapped signing handshakes. Running Android Studio / Xcode emulators introduces heavy dev friction and is incompatible with headless CI environments.

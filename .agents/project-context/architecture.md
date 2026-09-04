@@ -59,7 +59,7 @@ Status:
 * [ADR 0005: Production Service Deployment & Edge Topology](../../docs/adr/0005-production-service-deployment-and-edge-topology.md) — Provider-agnostic managed containers, dedicated ingress/TLS termination, pure mobile edge.
 * [ADR 0006: Sea Service Records & Statutory Endorsement Architecture](../../docs/adr/0006-sea-service-records-and-statutory-endorsement-architecture.md) — Composite FK TAR book binding, Master-certified aggregate watchkeeping totals, GiST date range exclusion, append-only endorsement lifecycle.
 * [ADR 0007: Shore Sync API Protocol, Wire Contracts & Idempotency](../../docs/adr/0007-shore-sync-api-protocol-wire-contracts-and-idempotency.md) — Heterogeneous operation envelopes, HTTP 200 differential receipts, monotonic sequence cursor pagination, presigned evidence upload.
-* [ADR 0008: Maritime Edge Device Simulator Architecture & Client Authority Boundary](../../docs/adr/0008-maritime-edge-device-simulator-architecture-and-client-authority-boundary.md) — Monorepo Go Bubbletea CLI, pure-Go SQLite, dual interactive/headless CI runner, and explicit non-authoritative boundary.
+* ~~[ADR 0008: Maritime Edge Device Simulator Architecture & Client Authority Boundary](../../docs/adr/0008-maritime-edge-device-simulator-architecture-and-client-authority-boundary.md)~~ — **SUPERSEDED**. Go CLI simulator dropped from scope. Client authority boundary concepts retained as reference.
 
 
 
