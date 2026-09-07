@@ -130,4 +130,16 @@ services:
         condition: service_healthy
       backend:
         condition: service_started
+      quartz:
+        condition: service_started
+
+  quartz:
+    build:
+      context: ./quartz
+      dockerfile: Dockerfile
+    container_name: docs-quartz
+    restart: unless-stopped
+    ports:
+      - "${QUARTZ_PORT:-8014}:80"
+
 
