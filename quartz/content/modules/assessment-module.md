@@ -1,33 +1,16 @@
 ---
-title: Assessment & Officer Sign-off Module
+title: "Assessment Bounded Context Module"
 ---
 
-# Assessment & Officer Sign-off Module
+# Assessment Bounded Context Module
 
-The **Assessment Module** (`com.mralmostcool.tarbook.assessment`) manages candidate competency evaluations, grade assignments, and multi-tier officer sign-offs.
+The Assessment Bounded Context handles officer sign-offs, task assessments, and competency verdicts.
 
----
+## Managed Domain Entities
 
-## ✍️ Assessment Workflow
+- [[database/tables/task_signoffs|task_signoffs]]: Cryptographically signed officer assessment records.
+- [[database/tables/task_assessments|task_assessments]]: Formal task competency assessments.
+- [[database/tables/assessment_signoffs|assessment_signoffs]]: Assessor and Master verdict sign-offs on task assessments.
 
-```mermaid
-stateDiagram-v2
-    [*] --> TaskAssessment: Candidate Requests Assessment
-    TaskAssessment --> GradeAssigned: Officer Evaluates Competency
-    GradeAssigned --> SignOffCreated: Officer ECDSA Signature Applied
-    SignOffCreated --> TaskCompleted: Sign-off Count Met
-```
-
----
-
-## 🗄️ Entities & Tables
-
-### 1. `TaskAssessment` (`task_assessments`)
-Records competency evaluations for a specific `SyllabusTask`.
-* **Grades**: `EXCELLENT`, `SATISFACTORY`, `NEEDS_IMPROVEMENT`, `NOT_YET_COMPETENT`.
-* **Statuses**: `PENDING`, `IN_PROGRESS`, `APPROVED`, `REJECTED`, `REWORK_REQUESTED`.
-
-### 2. `AssessmentSignOff` (`assessment_signoffs`)
-Append-only officer sign-off record storing verdict, comments, and timestamp.
-* **Roles**: `ASSESSOR`, `CHIEF_OFFICER`, `CHIEF_ENGINEER`, `MASTER`, `COMPANY_TRAINING_OFFICER`.
-* **Verdicts**: `APPROVED`, `REJECTED`, `REWORK_REQUESTED`.
+- [[modules/security-module|Security Bounded Context]]
+- [[database/tables/index|Database Table Descriptors Registry]]

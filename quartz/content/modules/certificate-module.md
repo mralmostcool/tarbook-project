@@ -1,34 +1,15 @@
 ---
-title: Seafarer Documents & Certificates Module
+title: "Certificate Bounded Context Module"
 ---
 
-# Seafarer Documents & Certificates Module
+# Certificate Bounded Context Module
 
-The **Certificate Module** (`com.mralmostcool.tarbook.certificate`) manages seafarer travel documents (Passport, CDC, INDOS, SID), STCW modular safety certificates, and audit verification records.
+The Certificate Bounded Context manages seafarer identity documents, STCW modular safety certificates, and document verification audits.
 
----
+## Managed Domain Entities
 
-## 📜 Document & Verification Model
+- [[database/tables/seafarer_documents|seafarer_documents]]: Travel and identity documents (Passport, CDC, SID, INDOS).
+- [[database/tables/seafarer_certificates|seafarer_certificates]]: STCW modular safety certificates (PST, FPFF, EFA, PSSR, STSDSD, etc.).
+- [[database/tables/document_verification_records|document_verification_records]]: Verification audit logs with JSON Canonicalization Scheme payload digests.
 
-```mermaid
-graph TD
-    Candidate[Candidate] -->|Holds| SeafarerDocument[SeafarerDocument - Passport/CDC]
-    Candidate -->|Holds| SeafarerCertificate[SeafarerCertificate - STCW Modular]
-    
-    SeafarerDocument -->|Audit Verification| DocumentVerificationRecord[DocumentVerificationRecord]
-    SeafarerCertificate -->|Audit Verification| DocumentVerificationRecord
-    DocumentVerificationRecord -->|Digest Match| EvidenceArtifact[EvidenceArtifact]
-```
-
----
-
-## 🗄️ Entities & Tables
-
-### 1. `SeafarerDocument` (`seafarer_documents`)
-Travel documents (Passport, Continuous Discharge Certificate, INDOS, Seafarers Identity Document).
-
-### 2. `SeafarerCertificate` (`seafarer_certificates`)
-STCW safety certificates (PST, FPFF, EFA, PSSR, STSDSD, Medical Fitness).
-
-### 3. `DocumentVerificationRecord` (`document_verification_records`)
-Verifiable verification log recording audit decisions (`APPROVED`, `REJECTED`, `REVOKED`) with JSON Canonicalization Scheme (JCS) payloads.
+- [[database/tables/index|Database Table Descriptors Registry]]

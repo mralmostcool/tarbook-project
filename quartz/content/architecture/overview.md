@@ -1,22 +1,21 @@
 ---
-title: System Architecture Overview
+title: "System Architecture Overview"
 ---
 
 # System Architecture Overview
 
-Project Tarbook is engineered as a **Spring Modulith** backend application deployed within a Docker-containerized runtime.
+Project Tarbook is engineered using a **Spring Modulith** architecture running on Java 21 and Spring Boot 3. It provides modular monolith capabilities with strict package boundaries, compile-time module isolation, and domain event messaging.
 
-## C4 System Context
+## Key Architectural Principles
 
-```mermaid
-graph TD
-    Cadet[Cadet / Officer Mobile App] -->|HTTPS / REST| Nginx[Nginx Reverse Proxy :80]
-    Nginx -->|/api/*| Backend[Spring Boot 4.1.1 Backend :8080]
-    Nginx -->|/docs/*| Quartz[Quartz 5 Docs :8014]
-    
-    Backend --> Postgres[(PostgreSQL 17 + PostGIS :5432)]
-    Backend --> Redis[(Redis 7 Cache :6379)]
-    Backend --> MinIO[(MinIO S3 Storage :9000)]
-```
+1. **Modular Monolith**: Eliminates network latency between domains while strictly enforcing bounded context boundaries.
+2. **Offline-First Resilience**: Mobile clients log tasks, capture evidence, and execute sign-offs offline, synchronizing asynchronously when connected.
+3. **Cryptographic Non-Repudiation**: Officer sign-offs and statutory discharge endorsements are signed using ECDSA P-256 hardware-backed keys.
+4. **Spatial Provenance**: Task executions and evidence captures include PostGIS spatial coordinates (`GEOMETRY(Point, 4326)`).
 
-See also: [[architecture/bounded-contexts|Bounded Context Map]], [[architecture/domain-invariants|Domain Invariants]].
+## Connected Architecture Links
+
+- [[architecture/bounded-contexts|Bounded Contexts Matrix]]
+- [[database/tables/index|Database Table Descriptors Registry]]
+- [[infrastructure/docker-compose-stack|Docker Compose Infrastructure Stack]]
+- [[sync/offline-sync-protocol|Offline Synchronization Protocol]]

@@ -1,34 +1,15 @@
 ---
-title: Sea Service & Master Endorsement Module
+title: "SeaService Bounded Context Module"
 ---
 
-# Sea Service & Master Endorsement Module
+# SeaService Bounded Context Module
 
-The **Sea Service Module** (`com.mralmostcool.tarbook.seaservice`) tracks voyage logbooks, certified sea-time days, watchkeeping hours, and Master/Chief Engineer statutory discharge endorsements.
+The SeaService Bounded Context manages voyage logging, watchkeeping hours calculation, and Master statutory discharge endorsements.
 
----
+## Managed Domain Entities
 
-## ⚓ Voyage & Endorsement Structure
+- [[database/tables/sea_service_records|sea_service_records]]: Shipboard voyage logs with PostGIS `btree_gist` non-overlapping temporal exclusion constraint.
+- [[database/tables/sea_service_endorsements|sea_service_endorsements]]: Statutory Master and Chief Engineer discharge endorsements.
 
-```mermaid
-graph TD
-    Candidate[Candidate] -->|Sign On Vessel| SeaServiceRecord[SeaServiceRecord]
-    SeaServiceRecord -->|Log Sea Days & Watch Hours| VoyageDetails[Days at Sea / Bridge Watch / Engine Watch]
-    SeaServiceRecord -->|Sign Off Discharge| SeaServiceEndorsement[SeaServiceEndorsement]
-    SeaServiceEndorsement -->|ECDSA Master Signature| SigningKey[OfficerSigningKey]
-```
-
----
-
-## 🗄️ Entities & GiST Constraint
-
-### 1. `SeaServiceRecord` (`sea_service_records`)
-Captures voyage details (vessel name, IMO, flag state, gross tonnage, sign-on/sign-off dates, days at sea, bridge and engine watchkeeping hours).
-
-> [!IMPORTANT]
-> Enforces non-overlapping voyage dates per candidate via PostgreSQL GiST exclusion constraint (`uq_non_overlapping_sea_service`).
-
-### 2. `SeaServiceEndorsement` (`sea_service_endorsements`)
-Statutory discharge endorsement signed by Master or Chief Engineer with nonces and signature bytes.
-* **Endorsement Types**: `INTERIM_HANDOVER`, `FINAL_DISCHARGE`.
-* **Ratings**: Conduct (`EXCELLENT`, `SATISFACTORY`, `UNSATISFACTORY`), Ability (`EXCELLENT`, `SATISFACTORY`, `UNSATISFACTORY`).
+- [[database/postgis-spatial|PostGIS Spatial Extensions & GiST Indexing]]
+- [[database/tables/index|Database Table Descriptors Registry]]
