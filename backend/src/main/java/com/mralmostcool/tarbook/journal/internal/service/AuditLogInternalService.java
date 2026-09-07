@@ -24,7 +24,7 @@ public class AuditLogInternalService {
     @Transactional
     public AuditLog logAction(AppUser actorUser, String action, String entityName, UUID entityId, String detailsJson) {
         Optional<AuditLog> latestLogOpt = auditLogRepository.findTopByOrderByLoggedAtUtcDesc();
-        String prevHash = latestLogOpt.map(AuditLog::getEntryHash).orElse("GENESIS_HASH_000000000000000000000000000000000000000000000000");
+        String prevHash = latestLogOpt.map(log -> log.getEntryHash()).orElse("GENESIS_HASH_000000000000000000000000000000000000000000000000");
 
         OffsetDateTime now = OffsetDateTime.now();
         String payload = String.format("%s|%s|%s|%s|%s|%s|%s",

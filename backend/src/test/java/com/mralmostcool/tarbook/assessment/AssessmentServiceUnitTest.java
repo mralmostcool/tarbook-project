@@ -150,7 +150,7 @@ class AssessmentServiceUnitTest {
 
         TaskAssessmentRepository taskAssessmentRepository = new TaskAssessmentRepository() {
             @Override
-            public TaskAssessment save(TaskAssessment entity) {
+            public <S extends TaskAssessment> S save(S entity) {
                 assessmentStore.removeIf(a -> a.getId().equals(entity.getId()));
                 assessmentStore.add(entity);
                 return entity;
@@ -228,7 +228,7 @@ class AssessmentServiceUnitTest {
 
         AssessmentSignOffRepository assessmentSignOffRepository = new AssessmentSignOffRepository() {
             @Override
-            public AssessmentSignOff save(AssessmentSignOff entity) {
+            public <S extends AssessmentSignOff> S save(S entity) {
                 signOffStore.add(entity);
                 return entity;
             }

@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +69,7 @@ class JournalServiceUnitTest {
 
         JournalEntryRepository journalEntryRepository = new JournalEntryRepository() {
             @Override
-            public JournalEntry save(JournalEntry entity) {
+            public <S extends JournalEntry> S save(S entity) {
                 entryStore.removeIf(e -> e.getId().equals(entity.getId()));
                 entryStore.add(entity);
                 return entity;
@@ -151,7 +150,7 @@ class JournalServiceUnitTest {
 
         AuditLogRepository auditLogRepository = new AuditLogRepository() {
             @Override
-            public AuditLog save(AuditLog entity) {
+            public <S extends AuditLog> S save(S entity) {
                 auditStore.add(entity);
                 return entity;
             }

@@ -115,7 +115,7 @@ class CertificateServiceUnitTest {
 
         SeafarerDocumentRepository documentRepository = new SeafarerDocumentRepository() {
             @Override
-            public SeafarerDocument save(SeafarerDocument entity) {
+            public <S extends SeafarerDocument> S save(S entity) {
                 documentStore.removeIf(d -> d.getId().equals(entity.getId()));
                 documentStore.add(entity);
                 return entity;
@@ -173,7 +173,7 @@ class CertificateServiceUnitTest {
 
         SeafarerCertificateRepository certificateRepository = new SeafarerCertificateRepository() {
             @Override
-            public SeafarerCertificate save(SeafarerCertificate entity) {
+            public <S extends SeafarerCertificate> S save(S entity) {
                 certificateStore.removeIf(c -> c.getId().equals(entity.getId()));
                 certificateStore.add(entity);
                 return entity;
@@ -231,7 +231,7 @@ class CertificateServiceUnitTest {
 
         DocumentVerificationRecordRepository verificationRepository = new DocumentVerificationRecordRepository() {
             @Override
-            public DocumentVerificationRecord save(DocumentVerificationRecord entity) {
+            public <S extends DocumentVerificationRecord> S save(S entity) {
                 verificationStore.add(entity);
                 return entity;
             }

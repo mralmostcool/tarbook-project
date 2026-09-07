@@ -92,20 +92,20 @@ public class SeaServiceRecordInternalService {
                 .filter(r -> r.getStatus() != SeaServiceStatus.VOIDED)
                 .toList();
 
-        int totalDaysAtSea = records.stream().mapToInt(SeaServiceRecord::getDaysAtSea).sum();
-        int totalDaysInPort = records.stream().mapToInt(SeaServiceRecord::getDaysInPort).sum();
+        int totalDaysAtSea = records.stream().mapToInt(r -> r.getDaysAtSea()).sum();
+        int totalDaysInPort = records.stream().mapToInt(r -> r.getDaysInPort()).sum();
 
         BigDecimal totalBridgeWatch = records.stream()
                 .map(r -> r.getBridgeWatchHoursDay().add(r.getBridgeWatchHoursNight()))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
         BigDecimal totalEngineWatch = records.stream()
                 .map(r -> r.getEngineWatchHoursDay().add(r.getEngineWatchHoursNight()))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
         BigDecimal totalSteering = records.stream()
-                .map(SeaServiceRecord::getSteeringHours)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(r -> r.getSteeringHours())
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
         return SeaServiceSummaryDto.builder()
                 .candidateId(candidateId)

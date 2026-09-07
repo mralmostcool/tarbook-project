@@ -7,7 +7,6 @@ import com.mralmostcool.tarbook.seaservice.dto.CreateSeaServiceRecordRequestDto;
 import com.mralmostcool.tarbook.seaservice.dto.EndorseSeaServiceRecordRequestDto;
 import com.mralmostcool.tarbook.seaservice.dto.SeaServiceEndorsementDto;
 import com.mralmostcool.tarbook.seaservice.dto.SeaServiceRecordDto;
-import com.mralmostcool.tarbook.seaservice.dto.SeaServiceSummaryDto;
 import com.mralmostcool.tarbook.seaservice.internal.domain.EndorserRole;
 import com.mralmostcool.tarbook.seaservice.internal.domain.EndorsementType;
 import com.mralmostcool.tarbook.seaservice.internal.domain.SeaServiceEndorsement;
@@ -68,7 +67,7 @@ class SeaServiceUnitTest {
 
         SeaServiceRecordRepository recordRepository = new SeaServiceRecordRepository() {
             @Override
-            public SeaServiceRecord save(SeaServiceRecord entity) {
+            public <S extends SeaServiceRecord> S save(S entity) {
                 recordStore.removeIf(r -> r.getId().equals(entity.getId()));
                 recordStore.add(entity);
                 return entity;
@@ -126,7 +125,7 @@ class SeaServiceUnitTest {
 
         SeaServiceEndorsementRepository endorsementRepository = new SeaServiceEndorsementRepository() {
             @Override
-            public SeaServiceEndorsement save(SeaServiceEndorsement entity) {
+            public <S extends SeaServiceEndorsement> S save(S entity) {
                 endorsementStore.add(entity);
                 return entity;
             }
