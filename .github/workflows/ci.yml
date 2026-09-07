@@ -1,4 +1,4 @@
-name: Tarbook CI/CD
+name: Project Tarbook CI/CD
 
 on:
   push:
@@ -11,8 +11,8 @@ permissions:
   packages: write
 
 jobs:
-  verify:
-    name: Lint, Build & Test
+  backend-verify:
+    name: Backend Build & Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -24,16 +24,39 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
+          cache-dependency-path: 'backend/pom.xml'
 
-      - name: Compile & Run Tests with Testcontainers
+      - name: Build & Run Unit Tests
         working-directory: backend
         run: |
           chmod +x mvnw
-          ./mvnw -B clean verify
+          ./mvnw -B test
+
+  quartz-verify:
+    name: Quartz Documentation Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'quartz/package-lock.json'
+
+      - name: Install Dependencies
+        working-directory: quartz
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Quartz Static Site
+        working-directory: quartz
+        run: node ./quartz/bootstrap-cli.mjs build
 
   publish-container:
-    name: Build & Publish Container Image
-    needs: verify
+    name: Build & Publish Container Images
+    needs: [backend-verify, quartz-verify]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -50,8 +73,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract Docker Metadata
-        id: meta
+      - name: Extract Backend Docker Metadata
+        id: meta-backend
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}/backend
@@ -59,13 +82,33 @@ jobs:
             type=sha,format=long
             type=raw,value=latest
 
-      - name: Build and Push Docker Image
+      - name: Build and Push Backend Image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-backend.outputs.tags }}
+          labels: ${{ steps.meta-backend.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Extract Quartz Docker Metadata
+        id: meta-quartz
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/quartz
+          tags: |
+            type=sha,format=long
+            type=raw,value=latest
+
+      - name: Build and Push Quartz Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./quartz
+          file: ./quartz/Dockerfile
+          push: true
+          tags: ${{ steps.meta-quartz.outputs.tags }}
+          labels: ${{ steps.meta-quartz.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
